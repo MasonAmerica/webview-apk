@@ -8,8 +8,9 @@ This is a simple Android application that demonstrates how to use the WebView co
 - **JavaScript Support**: Enabled for full web application functionality
 - **Progress Indicator**: Shows loading progress while the web page loads
 - **Back Navigation**: Handles back button presses to navigate within the WebView
-- **Error Handling**: Displays error messages if the web page fails to load
+- **Error Handling**: Displays error messages if the web page fails to load, and retries network errors until the page loads (useful for kiosks launched at boot before Wi-Fi connects)
 - **Media Playback**: Allows media playback without requiring user gesture
+- **Landscape Lock**: The activity is locked to landscape (`sensorLandscape`)
 
 ## How It Works
 
@@ -79,6 +80,16 @@ To change the app name displayed on the device, modify `app/src/main/res/values/
 <string name="app_name">Your Custom App Name</string>
 ```
 
+### Changing the Screen Orientation
+
+The app is locked to landscape in `app/src/main/AndroidManifest.xml`. `sensorLandscape` still flips 180° to match how the device is mounted:
+
+```xml
+android:screenOrientation="sensorLandscape"
+```
+
+Use `sensorPortrait` for portrait deployments, or remove the attribute to follow the device's rotation.
+
 ## Building the APK
 
 1. **Clone the repository**:
@@ -105,8 +116,9 @@ To change the app name displayed on the device, modify `app/src/main/res/values/
 
 ## Permissions
 
-The app requires the following permission:
+The app requires the following permissions:
 - `INTERNET` - To load web content
+- `ACCESS_NETWORK_STATE` - To retry loading the page as soon as the network connects
 
 ## Troubleshooting
 
