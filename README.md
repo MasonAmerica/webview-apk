@@ -11,6 +11,7 @@ This is a simple Android application that demonstrates how to use the WebView co
 - **Error Handling**: Displays error messages if the web page fails to load, and retries network errors until the page loads (useful for kiosks launched at boot before Wi-Fi connects)
 - **Media Playback**: Allows media playback without requiring user gesture
 - **Landscape Lock**: The activity is locked to landscape (`sensorLandscape`)
+- **Kiosk (Lock Task) Mode**: `android:lockTaskMode="if_whitelisted"` makes the app enter lock task automatically whenever it launches, if a device policy controller has allowlisted the package (e.g. Mason `lock_task_packages`). Back then does nothing on the first page. If the package isn't allowlisted, the app behaves normally.
 
 ## How It Works
 
